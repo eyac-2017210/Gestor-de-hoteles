@@ -14,6 +14,13 @@ import { EventsComponent } from './Components/events/events.component';
 import { ReservationComponent } from './Components/reservation/reservation.component';
 import { RoomsComponent } from './Components/rooms/rooms.component';
 import { HotelsComponent } from './Components/hotels/hotels.component';
+import { HotelsAdminComponent } from './Components/hotels-admin/hotels-admin.component';
+import { HotelsAdminHComponent } from './Components/hotels-admin-h/hotels-admin-h.component';
+import { RoomsAdminHComponent } from './Components/rooms-admin-h/rooms-admin-h.component';
+import { EventsAdminHComponent } from './Components/events-admin-h/events-admin-h.component';
+import { UsuariosAdminHComponent } from './Components/usuarios-admin-h/usuarios-admin-h.component';
+import { UsuariosAdminComponent } from './Components/usuarios-admin/usuarios-admin.component';
+import { InvoicesComponent } from './Components/invoices/invoices.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +33,14 @@ import { HotelsComponent } from './Components/hotels/hotels.component';
     EventsComponent,
     ReservationComponent,
     RoomsComponent,
-    HotelsComponent
+    HotelsComponent,
+    HotelsAdminComponent,
+    HotelsAdminHComponent,
+    RoomsAdminHComponent,
+    EventsAdminHComponent,
+    UsuariosAdminHComponent,
+    UsuariosAdminComponent,
+    InvoicesComponent
   ],
   imports: [
     BrowserModule,

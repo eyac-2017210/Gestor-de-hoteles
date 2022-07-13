@@ -3,6 +3,8 @@
 <div class="Titulos">
     <span></span>
     <h3>Habitaciones</h3>
+    <button type="button" class="btn btn-secondary btn-lg btn-card" data-bs-toggle="modal"
+data-bs-target="#exampleModal">Agregar Habitacion </button>
 </div>
 <section class="mt-5">
     <!-----Titulo-->
@@ -18,15 +20,11 @@
                 <!--Texto-->
                 <div class="textInfo">
                     <a  class="TituloInfo">Single</a>
-                    <p>Cantidad de Habitaciones
+                    <p>Cantidad de Habitaciones Disponibles
                     </p>
-                    <div class="mb-4">
-                        <label for="exampleInputEmail1" class="form-label">Cantidad de Habitaciones: </label>
-                        <input  name="CantidaddeHabitaciones" type="number" class="form-control" id="cantidaddeHabitaciones">
-                      </div>
+                    
                     <p>Precio 280$</p>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">Reservar</button>
+                    
                 </div>
             </div>
         </div>
@@ -42,15 +40,11 @@
                 <div class="textInfo">
 
                     <a  class="TituloInfo">Duo</a>
-                    <p>Cantidad de Habitaciones
+                    <p>Cantidad de Habitaciones Disponibles
                     </p>
-                    <div class="mb-4">
-                        <label for="exampleInputEmail1" class="form-label">Cantidad de Habitaciones: </label>
-                        <input  name="CantidaddeHabitaciones" type="number" class="form-control" id="cantidaddeHabitaciones">
-                      </div>
+                    
                     <p>Precio 370$</p>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">Reservar</button>
+                    
                 </div>
             </div>
         </div>
@@ -66,15 +60,11 @@
                 <div class="textInfo">
 
                     <a  class="TituloInfo">Suite</a>
-                    <p>Cantidad de Habitaciones
+                    <p>Cantidad de Habitaciones DIsponibles 
                     </p>
-                    <div class="mb-4">
-                        <label for="exampleInputEmail1" class="form-label">Cantidad de Habitaciones: </label>
-                        <input  name="CantidaddeHabitaciones" type="number" class="form-control" id="cantidaddeHabitaciones">
-                      </div>
+                    
                     <p>Precio 500$</p>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">Reservar</button>
+                    
                 </div>
             </div>
             <!--Modal-->
@@ -98,13 +88,23 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"> Agregar Reservacion </h5>
+                <h5 class="modal-title" id="exampleModalLabel"> Agregar Habitacion </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="Centrado">
-                    <span>¿Esta de acuerdo en hacer la reservación?</span>
+                    <span>Tipo de Habitacion</span>
+                    <input class="ms-2" type="text">
                     
+                </div>
+                <div class="Centrado">
+                    <span>Precio por Habitacion</span>
+                    <input class="ms-2" type="text">
+                    
+                </div>
+                <div>
+                    <span>Cantidad por Habitacion</span>
+                    <input class="ms-2" type="text">
                 </div>
             </div>
             <div class="modal-footer">

@@ -2,7 +2,9 @@
 
 <div class="Titulos">
     <span></span>
-    <h3>Habitaciones</h3>
+    <h3>Usuarios</h3>
+    <button type="button" class="btn btn-secondary btn-lg btn-card" data-bs-toggle="modal"
+data-bs-target="#exampleModal">Agregar Administrador de Hotel </button>
 </div>
 <section class="mt-5">
     <!-----Titulo-->
@@ -17,16 +19,12 @@
                 </div>
                 <!--Texto-->
                 <div class="textInfo">
-                    <a  class="TituloInfo">Single</a>
-                    <p>Cantidad de Habitaciones
+                    <a  class="TituloInfo"> diegof_03</a>
+                    <p>Nombre: Diego Fernando <br>
+                        Apellido: Solís López <br>
+                        Funcion: Admin<br>
+                        Telefono: 58989610
                     </p>
-                    <div class="mb-4">
-                        <label for="exampleInputEmail1" class="form-label">Cantidad de Habitaciones: </label>
-                        <input  name="CantidaddeHabitaciones" type="number" class="form-control" id="cantidaddeHabitaciones">
-                      </div>
-                    <p>Precio 280$</p>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">Reservar</button>
                 </div>
             </div>
         </div>
@@ -41,16 +39,12 @@
                 <!--Texto-->
                 <div class="textInfo">
 
-                    <a  class="TituloInfo">Duo</a>
-                    <p>Cantidad de Habitaciones
+                    <a  class="TituloInfo">Gmonzon04</a>
+                    <p>Nombre: Edgar Gerardo <br>
+                        Apellido: Monzon Marroquin <br>
+                        Funcion: Admin<br>
+                        Telefono: 7577631
                     </p>
-                    <div class="mb-4">
-                        <label for="exampleInputEmail1" class="form-label">Cantidad de Habitaciones: </label>
-                        <input  name="CantidaddeHabitaciones" type="number" class="form-control" id="cantidaddeHabitaciones">
-                      </div>
-                    <p>Precio 370$</p>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">Reservar</button>
                 </div>
             </div>
         </div>
@@ -65,19 +59,14 @@
                 <!--Texto-->
                 <div class="textInfo">
 
-                    <a  class="TituloInfo">Suite</a>
-                    <p>Cantidad de Habitaciones
+                    <a  class="TituloInfo">mruiz-2018 </a>
+                    <p>Nombre: Manuel Enrique <br>
+                        Apellido: Ruiz Sequen<br>
+                        Funcion: Admin  <br>
+                        Telefono:  67891234
                     </p>
-                    <div class="mb-4">
-                        <label for="exampleInputEmail1" class="form-label">Cantidad de Habitaciones: </label>
-                        <input  name="CantidaddeHabitaciones" type="number" class="form-control" id="cantidaddeHabitaciones">
-                      </div>
-                    <p>Precio 500$</p>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">Reservar</button>
                 </div>
             </div>
-            <!--Modal-->
 
 
         </div>
@@ -86,24 +75,38 @@
 
     </div>
 </section>
-
-
-
-
-
-
-
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"> Agregar Reservacion </h5>
+                <h5 class="modal-title" id="exampleModalLabel"> Agregar Evento </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="Centrado">
-                    <span>¿Esta de acuerdo en hacer la reservación?</span>
+                    <span>Nombre: </span>
+                    <input class="ms-2" type="text">
+                    
+                </div>
+                <div class="Centrado">
+                    <span>Usuario: </span>
+                    <input class="ms-2" type="text">
+                    
+                </div>
+                <div class="Centrado">
+                    <span>Email: </span>
+                    <input class="ms-2" type="text">
+                    
+                </div>
+                <div class="Centrado">
+                    <span>Telefono: </span>
+                    <input class="ms-2" type="text">
+                    
+                </div>
+                <div class="Centrado">
+                    <span>Contraseña: </span>
+                    <input class="ms-2" type="text">
                     
                 </div>
             </div>
