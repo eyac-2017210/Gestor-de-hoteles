@@ -5,8 +5,8 @@ const User = require('../models/user.model');
 const Hotel = require('../models/hotel.model');
 const Room = require('../models/room.model');
 const Event = require('../models/event.model');
+const Invoice = require('../models/invoice.model');
 const { validateData } = require('../utils/validate');
-const moment = require('moment');
 
 exports.pruebaReservation = async(req, res)=>{
     return res.send({message: 'Hola'});
@@ -149,6 +149,35 @@ exports.cancelReservation = async(req, res)=>{
         const roomExist = reserExist.rooms;
         const quantity = roomExist[0];
         const roomsExist = await Room.findOne({_id: quantity.room});
+        const invoExist = await Invoice.findOne({user: userLog});
+        if(invoExist){
+            const invoice = {
+                hotel: reserExist.hotel,
+                dateStart: reserExist.dateStart,
+                days: reserExist.days,
+                total: reserExist.total,
+                condition: 'Reservacion cancelada'
+            }
+            const pushInovice = await Invoice.findOneAndUpdate(
+                {_id: invoExist._id},
+                { $push: {invoices: invoice}},
+                {new: true}
+            )
+        }else{
+            const invoice ={
+                hotel: reserExist.hotel,
+                dateStart: reserExist.dateStart,
+                days: reserExist.days,
+                total: reserExist.total,
+                condition: 'Reservacion cancelada'
+            }
+            const data = {
+                user: req.user.sub,
+                invoices: invoice 
+            }
+            const invo = new Invoice(data);
+            await invo.save();
+        }
         const suma ={
             available: roomsExist.available + quantity.quantity
         }
@@ -174,13 +203,42 @@ exports.payReservation = async(req, res)=>{
             const roomExist = reserExist.rooms;
             const quantity = roomExist[0];
             const roomsExist = await Room.findOne({_id: quantity.room});
+            const invoExist = await Invoice.findOne({user: userLog});
+            if(invoExist){
+                const invoice = {
+                    hotel: reserExist.hotel,
+                    dateStart: reserExist.dateStart,
+                    days: reserExist.days,
+                    total: reserExist.total,
+                    condition: 'Reservacion Pagada'
+                }
+                const pushInovice = await Invoice.findOneAndUpdate(
+                    {_id: invoExist._id},
+                    { $push: {invoices: invoice}},
+                    {new: true}
+                );
+            }else{
+                const invoice ={
+                    hotel: reserExist.hotel,
+                    dateStart: reserExist.dateStart,
+                    days: reserExist.days,
+                    total: reserExist.total,
+                    condition: 'Reservacion pagada'
+                }
+                const data = {
+                    user: req.user.sub,
+                    invoices: invoice 
+                }
+                const invo = new Invoice(data);
+                await invo.save();
+            }
             const suma ={
                 available: roomsExist.available + quantity.quantity
             }
             const roomAva = await Room.findOneAndUpdate({_id: roomsExist}, suma, {new: true});
             const reserDeleted = await Reser.findOneAndDelete({_id: reserExist._id});
             if(!reserDeleted) return res.status(400).send({message: 'No se pudo realizar el pago de la reservacion'});
-            return res.send({message: 'Reservacion pagada'});
+            return res.send({message: 'Reservacion pagada (El dinero sobrante es propina nuestra :D)'});
         }else if(pay<reserExist.total) return res.status(400).send({message: 'Saldo insuficiente para pagar la reservacion'});
 
     }catch(err){

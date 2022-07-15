@@ -9,8 +9,8 @@ api.get('/getHotels', hotelController.getHotels);
 api.post('/searchByName', hotelController.searchByName);
 api.post('/searchByDirection', hotelController.searchByDirection);
 api.get('/pruebaHotel', hotelController.testHotel);
-api.post('/saveHotel', [mdAuth.ensureAuth, mdAuth.isAdmin], hotelController.saveHotel);
-api.get('/getHotel', [mdAuth.ensureAuth, mdAuth.isAdminHo], hotelController.getHotel);
+api.post('/saveHotel', [mdAuth.ensureAuth, mdAuth.isAdmin], hotelController.saveHotel);  // solo administrador general
+api.get('/getHotel', [mdAuth.ensureAuth, mdAuth.isAdminHo], hotelController.getHotel);  //hotel del administrador de hotel
 api.get('/getHotelId/:id', mdAuth.ensureAuth, hotelController.getHotelId);
 api.get('/getUserByHotel', [mdAuth.ensureAuth, mdAuth.isAdminHo], hotelController.usersByHotel);
 

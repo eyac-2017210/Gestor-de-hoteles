@@ -7,12 +7,12 @@ const mdAuth = require('../services/authenticated');
 
 api.get('/pruebaEvent', eventController.testEvent);
 api.post('/saveEvent', [mdAuth.ensureAuth, mdAuth.isAdminHo], eventController.saveEvent);
-api.get('/getEventsByHotel', [mdAuth.ensureAuth, mdAuth.isAdminHo], eventController.getEventByAdmin);
-api.get('/getEventsById/:id', mdAuth.ensureAuth, eventController.getEventsById);
+api.get('/getEventsByHotel', [mdAuth.ensureAuth, mdAuth.isAdminHo], eventController.getEventByAdmin);  
+api.get('/getEventsById/:id', mdAuth.ensureAuth, eventController.getEventsById);  
 
 api.put('/updateEvent/:id', [mdAuth.ensureAuth, mdAuth.isAdminHo], eventController.updateEvent);
 api.delete('/deleteEvent/:id', [mdAuth.ensureAuth, mdAuth.isAdminHo], eventController.deleteEvent);
 
-api.post('/saveEvents', [mdAuth.ensureAuth, mdAuth.isAdmin], eventController.saveEventsByAdmin);
+api.post('/saveEvents', [mdAuth.ensureAuth, mdAuth.isAdmin], eventController.saveEventsByAdmin); 
 
 module.exports = api;
