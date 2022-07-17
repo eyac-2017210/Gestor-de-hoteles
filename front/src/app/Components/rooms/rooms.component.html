@@ -8,7 +8,7 @@
     <!-----Titulo-->
     <div class="display">
         <!---Contenedores de Blog-->
-        <div class="contenedores">
+        <div class="contenedores" *ngFor="let room of rooms">
             <!--Caja Uno-->
             <div class="CajaDeInfo">
                 <!--Imagen de Apartado-->
@@ -17,69 +17,15 @@
                 </div>
                 <!--Texto-->
                 <div class="textInfo">
-                    <a  class="TituloInfo">Single</a>
-                    <p>Cantidad de Habitaciones
+                    <a  class="TituloInfo">{{room.type}}</a>
+                    <p>Cantidad de Habitaciones Disponibles
                     </p>
-                    <div class="mb-4">
-                        <label for="exampleInputEmail1" class="form-label">Cantidad de Habitaciones: </label>
-                        <input  name="CantidaddeHabitaciones" type="number" class="form-control" id="cantidaddeHabitaciones">
-                      </div>
-                    <p>Precio 280$</p>
+                    <label for="exampleInputEmail1" class="form-label" style="text-align: center; font-weight: bold; font-size: 25px;">{{room.available}}</label>                    
+                    <p>Precio: Q.{{room.price}}</p>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#exampleModal">Reservar</button>
                 </div>
             </div>
-        </div>
-        <!---Contenedores de Blog2-->
-        <div class="contenedores">
-            <!--Caja Uno-->
-            <div class="CajaDeInfo">
-                <!--Imagen de Apartado-->
-                <div class="ImagenInfo">
-
-                </div>
-                <!--Texto-->
-                <div class="textInfo">
-
-                    <a  class="TituloInfo">Duo</a>
-                    <p>Cantidad de Habitaciones
-                    </p>
-                    <div class="mb-4">
-                        <label for="exampleInputEmail1" class="form-label">Cantidad de Habitaciones: </label>
-                        <input  name="CantidaddeHabitaciones" type="number" class="form-control" id="cantidaddeHabitaciones">
-                      </div>
-                    <p>Precio 370$</p>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">Reservar</button>
-                </div>
-            </div>
-        </div>
-        <!---Contenedores de Blog3-->
-        <div class="contenedores">
-            <!--Caja Uno-->
-            <div class="CajaDeInfo">
-                <!--Imagen de Apartado-->
-                <div class="ImagenInfo">
-
-                </div>
-                <!--Texto-->
-                <div class="textInfo">
-
-                    <a  class="TituloInfo">Suite</a>
-                    <p>Cantidad de Habitaciones
-                    </p>
-                    <div class="mb-4">
-                        <label for="exampleInputEmail1" class="form-label">Cantidad de Habitaciones: </label>
-                        <input  name="CantidaddeHabitaciones" type="number" class="form-control" id="cantidaddeHabitaciones">
-                      </div>
-                    <p>Precio 500$</p>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">Reservar</button>
-                </div>
-            </div>
-            <!--Modal-->
-
-
         </div>
 
 

@@ -1,1 +1,49 @@
 <app-nav-bar></app-nav-bar>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div id="container" *ngFor="let hotel of hotels">	
+	
+	<div class="product-details">
+		
+	<h1>{{hotel.name}}</h1>
+	<span class="hint-star star">
+		<i class="fa fa-star" aria-hidden="true"></i>
+		<i class="fa fa-star" aria-hidden="true"></i>
+		<i class="fa fa-star" aria-hidden="true"></i>
+		<i class="fa fa-star" aria-hidden="true"></i>
+		<i class="fa fa-star-o" aria-hidden="true"></i>
+	</span>
+		
+
+		
+		
+<div class="control">
+	
+	<button class="btn">
+	 <span class="price">$</span>
+   <span class="shopping-cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
+   <span class="buy" [routerLink]="['/rooms/' + hotel._id]">RESERVAR</span>
+ </button>
+	
+</div>
+			
+</div>
+	
+<div class="product-image">
+	
+	<img src="../../../assets/img/tridente2.jpg" alt="">
+	
+
+<div class="info">
+	<h2> Descripción</h2>
+	<ul>
+		<li><strong>Dirección : </strong>{{hotel.direction}}</li>
+		<li><strong>Contacto  : </strong>{{hotel.phone}}</li>
+		<li><strong>Email     : </strong>{{hotel.email}}</li>
+        <button class="button-50" role="button" style="margin-top: 33%; margin-left: 13%;">EVENTOS</button>
+		
+	</ul>
+</div>
+</div>
+
+</div>
