@@ -9,7 +9,7 @@
     <!-----Titulo-->
     <div class="display">
         <!---Contenedores de Blog-->
-        <div class="contenedores">
+        <div class="contenedores" *ngFor="let event of events">
             <!--Caja Uno-->
             <div class="CajaDeInfo">
                 <!--Imagen de Apartado-->
@@ -18,59 +18,15 @@
                 </div>
                 <!--Texto-->
                 <div class="textInfo">
-                    <a  class="TituloInfo">Banana Splash</a>
+                    <a  class="TituloInfo">{{event.name}}</a>
                     <p>En esta atracción usted podra disfrutar de una experiencia en la que podra experimentar adrenalina y diversion en el mismo momento. <br>
                         Podra tener divertirese y convivir con su familia a otro nivel. <br>
                         <br>
-                        Todo esto y más a un modico precio de 20$ por Persona 
+                        Precio: Q.{{event.price}} 
                     </p>
                 </div>
             </div>
         </div>
-        <!---Contenedores de Blog2-->
-        <div class="contenedores">
-            <!--Caja Uno-->
-            <div class="CajaDeInfo">
-                <!--Imagen de Apartado-->
-                <div class="ImagenInfo">
-
-                </div>
-                <!--Texto-->
-                <div class="textInfo">
-
-                    <a  class="TituloInfo">Party Yacht</a>
-                    <p>Con nuestro PartyYacht usted contara con la mejor diversión y entretenimiento para adultos sobre mar, lograra tener la cocteleria más fina. <br>
-                        Podra experimentar la vida nocturna a su nivel maximo <br>
-                        <br>
-                        El paquete le incluye All Can You Drink de todo y Botanas todo por un precio de 120$
-                    </p>
-                </div>
-            </div>
-        </div>
-        <!---Contenedores de Blog3-->
-        <div class="contenedores">
-            <!--Caja Uno-->
-            <div class="CajaDeInfo">
-                <!--Imagen de Apartado-->
-                <div class="ImagenInfo">
-
-                </div>
-                <!--Texto-->
-                <div class="textInfo">
-
-                    <a  class="TituloInfo">Torneo de Ping Pong </a>
-                    <p>En nuestro torneo de Ping Pong usted podra llevarse todo tipo de premios y podra lograr demostrar sus habilidades y distresas en este deporte.<br>
-                        Podra sentir la adrenalina y podra conocer sus capcaidades bajo presión  <br>
-                        <br>
-                       Con los 20$ de entrada tendra un intento y se proveera con bebidas y botanas de cortesia, no se lo pierda!
-                    </p>
-                </div>
-            </div>
-
-
-        </div>
-
-
 
     </div>
 </section>

@@ -40,7 +40,7 @@
 		<li><strong>Dirección : </strong>{{hotel.direction}}</li>
 		<li><strong>Contacto  : </strong>{{hotel.phone}}</li>
 		<li><strong>Email     : </strong>{{hotel.email}}</li>
-        <button class="button-50" role="button" style="margin-top: 33%; margin-left: 13%;">EVENTOS</button>
+        <button [routerLink]="['/events/' + hotel._id]" class="button-50" role="button" style="margin-top: 33%; margin-left: 13%;">EVENTOS</button>
 		
 	</ul>
 </div>
