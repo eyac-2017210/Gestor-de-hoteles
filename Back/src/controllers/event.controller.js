@@ -21,6 +21,7 @@ exports.saveEvent = async(req, res)=>{
         const data = {
             name: params.name,
             price: params.price,
+            description: params.description,
             hotel: hotelExist._id
         }
 

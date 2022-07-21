@@ -3,6 +3,7 @@ export class EventModel {
         public id: String,
         public name: String,
         public price: number,
+        public description: String,
         public hotel: String,
     ){
 

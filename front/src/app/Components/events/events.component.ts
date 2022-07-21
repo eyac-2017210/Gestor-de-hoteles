@@ -18,7 +18,7 @@ export class EventsComponent implements OnInit {
     public activateRoute : ActivatedRoute,
     public eventRest: EventRestService
   ) { 
-    this.event = new EventModel('', '', 0, '');
+    this.event = new EventModel('', '', 0, '', '');
   }
 
   ngOnInit(): void {

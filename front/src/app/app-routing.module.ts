@@ -8,6 +8,7 @@ import { HotelsComponent } from './Components/hotels/hotels.component';
 import { EventsComponent } from './Components/events/events.component';
 import { ReservationComponent } from './Components/reservation/reservation.component';
 import { RoomsComponent } from './Components/rooms/rooms.component';
+import { InvoicesComponent } from './Components/invoices/invoices.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: 'events/:id', component: EventsComponent},
   {path: 'reservation', component: ReservationComponent},
   {path: 'rooms/:id', component: RoomsComponent},
+  {path: 'invoices', component: InvoicesComponent},
   {path: '**', component: NotFoundComponent}
   
 ];
