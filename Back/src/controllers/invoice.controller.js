@@ -6,7 +6,7 @@ const User = require('../models/user.model');
 exports.getInvoices = async(req, res)=>{
     try{
         const userLog = req.user.sub;
-        const invoices = await Invoice.find({user: userLog}).lean();
+        const invoices = await Invoice.find({user: userLog}).populate('hotel').populate('user').lean();
         if(invoices.length == 0){
             res.status(400).send({message: 'Facturas no encontradas'});
         }else{

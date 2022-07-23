@@ -5,7 +5,7 @@
     <h3>Facturas</h3>
 </div>
 
-<section class="mt-5">
+<section class="mt-5" *ngFor="let invoice of invoices">
     <!-----Titulo-->
     <div class="display">
         <!---Contenedores de Blog-->
@@ -18,40 +18,17 @@
                 </div>
                 <!--Texto-->
                 <div class="textInfo">
-                    <a class="TituloInfo">Hilton</a>
-                    <p> Fecha de Inicio: 2022/09/22
-                       <br> Noches: 2
-                       <br> Total: 480
-                       <br> Estado: Cancelado
+                    <a class="TituloInfo">{{invoice.hotel.name}}</a>
+                    <p>Fecha de inicio: <br> {{invoice.dateStart}}
+                       <br> Noches: {{invoice.days}}
+                       <br> Total: {{invoice.total}}
+                       <br> Estado: {{invoice.condition}}
+                       <br> Usuario: {{invoice.user.name}}
                     </p>
                     
                 </div>
             </div>
         </div>
-        <!---Contenedores de Blog2-->
-        <div class="contenedores">
-            <!--Caja Uno-->
-            <div class="CajaDeInfo">
-                <!--Imagen de Apartado-->
-                <div class="ImagenInfo">
-
-                </div>
-                <!--Texto-->
-                <div class="textInfo">
-
-                    <a  class="TituloInfo"> Camino Real</a>
-                    <p> Fecha de Inicio: 2022/09/22
-                        <br> Noches: 2
-                        <br> Total: 480
-                        <br> Estado: Cancelado
-                     </p>
-                    
-                </div>
-            </div>
-        </div>
-        
-        
-
 
     </div>
 </section>

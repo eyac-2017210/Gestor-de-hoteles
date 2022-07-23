@@ -6,10 +6,10 @@ const reservationSchema = mongoose.Schema({
     user: {type: mongoose.Schema.ObjectId, ref: 'User'},
     dateStart: Date,
     days: Number,
+    quantity: Number,
     hotel: {type: mongoose.Schema.ObjectId, ref: 'Hotel'},
     rooms: [{
         room: {type: mongoose.Schema.ObjectId, ref: 'Room'},
-        quantity: Number,
         subTotal: Number
     }],
     events: [{

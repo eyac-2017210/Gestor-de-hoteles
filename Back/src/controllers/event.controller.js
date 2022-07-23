@@ -134,3 +134,15 @@ exports.saveEventsByAdmin = async(req, res)=>{
         return res.status(500).send({message: 'Error guardando eventos'});
     }
 }
+
+exports.getEvent = async (req, res)=>{
+    try {
+        const eventId = req.params.id;
+        const event = await Event.findOne({_id: eventId })
+        return res.status(200).send({event});
+
+    } catch (error) {
+        console.log(error);
+        return error;
+    }
+};

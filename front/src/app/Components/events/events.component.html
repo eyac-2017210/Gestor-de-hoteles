@@ -23,10 +23,41 @@
                         <br>
                         <br>
                         Precio: Q.{{event.price}} 
-                    </p>
+                    </p> <br>
+                    <div style="margin-left: 35%;">
+                        <button (click)="getEvent(event._id)"  data-bs-toggle="modal"
+                        data-bs-target="#exampleModal" class="btn" role="button">Agregar</button>
+                    </div>
                 </div>
             </div>
         </div>
 
     </div>
 </section>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"> Agregar Reservacion </h5>
+                <button  type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                
+            </div>
+            <div class="modal-body">
+                <div class="Centrado">
+                    <div class="content-text p-4">
+                        <form  #addEventForm="ngForm" >
+
+                        </form>
+                      </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button (click)="addEventsToReservation(addEventForm)" data-bs-dismiss="modal" type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>

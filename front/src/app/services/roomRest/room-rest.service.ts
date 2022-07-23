@@ -19,4 +19,8 @@ export class RoomRestService {
     getRoomsById(id: string){
       return this.http.get(environment.baseUrl + 'room/getRoomsById/' + id, {headers:this.httOptions})
     }
+
+    getRoom(id: string){
+      return this.http.get(environment.baseUrl + 'room/getRoom/' + id, {headers:this.httOptions});
+    };
 }

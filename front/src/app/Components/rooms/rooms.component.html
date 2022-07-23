@@ -22,7 +22,8 @@
                     </p>
                     <label for="exampleInputEmail1" class="form-label" style="text-align: center; font-weight: bold; font-size: 25px;">{{room.available}}</label>                    
                     <p>Precio: Q.{{room.price}}</p>
-                    <button *ngIf="role=='CLIENT'" type="button" class="btn btn-primary">Reservar</button>
+                    <button (click)="getRoom(room._id)" *ngIf="role=='CLIENT'" type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">Reservar</button>
                 </div>
             </div>
         </div>
@@ -30,4 +31,41 @@
     </div>
 </section>
 
-
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"> Agregar Reservacion </h5>
+                <button  type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                
+            </div>
+            <div class="modal-body">
+                <div class="Centrado">
+                    <div class="content-text p-4">
+                        <form  #addReservationForm="ngForm" >
+                            <div class="form-group">
+                                <label for="dateStart">Fecha de inicio</label>
+                                <input [(ngModel)]="reservation.dateStart" name="dateStart" type="date" class="form-control" id="dateStart" placeholder="Fecha">
+                            </div>
+                            <br>
+                          <div class="form-group">
+                            <label for="days">Días de hospedaje</label>
+                            <input [(ngModel)]="reservation.days" name="days" type="number" class="form-control" id="days" placeholder="Días de hospedaje">
+                          </div>
+                          <br>
+                          <div class="form-group">
+                            <label for="quantity">Cantidad de habitaciones</label>
+                            <input [(ngModel)]="reservation.quantity"  name="quantity"   type="number" class="form-control" id="quantity" placeholder="Cantidad">
+                          </div>
+                        </form>
+                      </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button (click)="addRoomToReservation(addReservationForm)" data-bs-dismiss="modal" type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>

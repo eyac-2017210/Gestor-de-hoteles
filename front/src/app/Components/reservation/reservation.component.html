@@ -4,12 +4,10 @@
     <span></span>
     <h3>Reservacion</h3>
 </div>
-<button type="button" class="btn btn-secondary btn-lg btn-card" data-bs-toggle="modal"
-data-bs-target="#exampleModal">Agregar Evento</button>
-<button type="button" class="btn btn-secondary btn-lg btn-card" >Cancelar Reservacion</button>
+<button (click)="cancelReservation()" type="button" class="btn btn-secondary btn-lg btn-card" >Cancelar Reservacion</button>
 <button type="button" class="btn btn-secondary btn-lg btn-card" data-bs-toggle="modal"
 data-bs-target="#Modal2">Pagar Reservacion</button>
-<section class="mt-5">
+<section  class="mt-5">
     <!-----Titulo-->
     <div class="display">
         <!---Contenedores de Blog-->
@@ -22,35 +20,14 @@ data-bs-target="#Modal2">Pagar Reservacion</button>
                 </div>
                 <!--Texto-->
                 <div class="textInfo">
-                    <a class="TituloInfo">Single</a>
-                    <p>Una Habitacion
-                       <br> Precio 280$</p>
+                    <a class="TituloInfo">Hotel: <br>{{reservations.hotel.name}}</a>
+                    <p>Días de la reserva: <br> {{reservations.days}} <br>
+                     Cantidad de habitaciones: <br>{{reservations.quantity}}
+                       <br>Total: Q.{{reservations.total}}</p>
                     
                 </div>
             </div>
         </div>
-        <!---Contenedores de Blog2-->
-        <div class="contenedores">
-            <!--Caja Uno-->
-            <div class="CajaDeInfo">
-                <!--Imagen de Apartado-->
-                <div class="ImagenInfo">
-
-                </div>
-                <!--Texto-->
-                <div class="textInfo">
-
-                    <a  class="TituloInfo">Banana Splash</a>
-                    <p>Un Evento
-                     <br> Precio 370$</p>
-                    
-                </div>
-            </div>
-        </div>
-        
-        
-
-
     </div>
 </section>
 
@@ -61,43 +38,7 @@ data-bs-target="#Modal2">Pagar Reservacion</button>
 
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"> Agregar Evento </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="Centrado">
-                    <span>Evento</span>
-                    
-                    <select class="SelectBox" name="format" id="format">
-                        <option selected disabled></option>
-                        <option value="1">Banana Splash</option>
-                        <option value="2">Torneo Ping Pong</option>
-                        <option value="3">Party Yacht</option>
-                    </select>
-                    <span>Cantidad</span>
-                    
-                    <select class="SelectBox" name="format" id="format">
-                        <option selected disabled></option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
-                
-                    
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Guardar</button>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 <div class="modal fade" id="Modal2" tabindex="-1" aria-labelledby="Modal2Label" aria-hidden="true">
     <div class="modal-dialog">
@@ -107,22 +48,25 @@ data-bs-target="#Modal2">Pagar Reservacion</button>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <form #addPayForm="ngForm"> 
                 <div class="Centrado">
-                    <p>Total: 1500$
+                    <p>Total: Q.{{reservations.total}}
                 <br>
                     Saldo:
                     
                 </p>
                     <div class="mb-4">
-                        <label for="exampleInputEmail1" class="form-label">  </label>
-                        <input  name="CantidaddeHabitaciones" type="number" class="form-control" id="cantidaddeHabitaciones">
+                        <label for="pay" class="form-label">  </label>
+                        <input [(ngModel)]="pay" name="pay" type="number" class="form-control" id="pay">
                       </div>
                     
                 </div>
+                </form>
             </div>
+            
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Pagar</button>
+                <button (click)="payReservation(addPayForm)" data-bs-toggle="modal" type="button" class="btn btn-primary">Pagar</button>
             </div>
         </div>
     </div>

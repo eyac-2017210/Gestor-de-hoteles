@@ -36,8 +36,7 @@ exports.addRoomsToReservation = async(req, res)=>{
                 if(roomId == data.room) return res.status(400).send({message: 'Ya cuentas con estas habitaciones en tu reservacion'});
             }
             const room = {
-                room: roomId,
-                quantity: params.quantity,
+                room: params.room,
                 subTotal: params.quantity * roomExist.price * params.days
             }
             const resta = {
@@ -57,7 +56,6 @@ exports.addRoomsToReservation = async(req, res)=>{
             if(params.quantity > roomExist.available) return res.status(400).send({mesage: 'No contamos con suficientes habitaciones para la cantidad deseada'});
             const room = {
                 room: roomId,
-                quantity: params.quantity,
                 subTotal: params.quantity * roomExist.price * params.days
             }
             const hotelExist = await Hotel.findOne({_id: roomExist.hotel});
@@ -65,6 +63,7 @@ exports.addRoomsToReservation = async(req, res)=>{
                 user: req.user.sub,
                 dateStart: params.dateStart,
                 days: params.days,
+                quantity: params.quantity,
                 hotel: hotelExist._id,
                 rooms: room
             };
@@ -85,27 +84,26 @@ exports.addRoomsToReservation = async(req, res)=>{
 }
 
 exports.addEventsToReservation = async(req, res)=>{
-    try{    
-        
-        const params = req.body;
+    try{
+
+        const eventId = req.params.id;
         const userLog = req.user.sub;
         const data = {
-            event: params.event
+            event: eventId
         }
         const msg = validateData(data);
         if (msg) return res.status(400).send(msg);
-        const eventExist = await Event.findOne({_id: params.event});
+        const eventExist = await Event.findOne({_id: eventId});
         const reserExist = await Reser.findOne({user: userLog});
-        const roomExist = reserExist.rooms;
-        const quantity = roomExist[0];
+        const quantity = reserExist.quantity;
         if(eventExist.hotel.toString() != reserExist.hotel.toString()) return res.status(400).send({message: 'no se puede agregar eventos de un hotel diferente a las habitaciones'});
         if(reserExist){
             for(let event of reserExist.events){
-                if(event.event == params.event) return res.status(400).send({message: 'Ya cuentas con este evento en tu reservacion'});
+                if(event.event == eventId) return res.status(400).send({message: 'Ya cuentas con este evento en tu reservacion'});
             }
             const event = {
-                event: params.event,
-                subTotal: quantity.quantity * reserExist.days * eventExist.price
+                event: eventId,
+                subTotal: quantity * reserExist.days * eventExist.price
             }
             const total2 = reserExist.events.map(event=>
                 event.subTotal).reduce((prev, curr)=> prev + curr, 0) + event.subTotal;
@@ -130,7 +128,7 @@ exports.getReservation = async(req, res)=>{
     try{
 
         const userLog = req.user.sub;
-        const reserExist = await Reser.findOne({user: userLog});
+        const reserExist = await Reser.findOne({user: userLog}).populate('hotel');
         if(!reserExist) return res.status(400).send({message: 'El usuario todavia no cuenta con reservaciones'});
         return res.send({message: 'Reservacion del hotel: ', reserExist});
 
@@ -149,49 +147,30 @@ exports.cancelReservation = async(req, res)=>{
         const roomExist = reserExist.rooms;
         const quantity = roomExist[0];
         const roomsExist = await Room.findOne({_id: quantity.room});
-        const invoExist = await Invoice.findOne({user: userLog});
-        if(invoExist){
-            const invoice = {
-                hotel: reserExist.hotel,
-                dateStart: reserExist.dateStart,
-                days: reserExist.days,
-                total: reserExist.total,
-                condition: 'Reservacion cancelada'
-            }
-            const pushInovice = await Invoice.findOneAndUpdate(
-                {_id: invoExist._id},
-                { $push: {invoices: invoice}},
-                {new: true}
-            )
-        }else{
-            const invoice ={
-                hotel: reserExist.hotel,
-                dateStart: reserExist.dateStart,
-                days: reserExist.days,
-                total: reserExist.total,
-                condition: 'Reservacion cancelada'
-            }
-            const data = {
-                user: req.user.sub,
-                invoices: invoice 
-            }
-            const invo = new Invoice(data);
-            await invo.save();
+        const data = {
+            user: req.user.sub,
+            hotel: reserExist.hotel,
+            dateStart: reserExist.dateStart,
+            days: reserExist.days,
+            total: reserExist.total,
+            condition: 'Reservacion pagada'
         }
+        const invo = new Invoice(data);
+        await invo.save();
+
         const suma ={
-            available: roomsExist.available + quantity.quantity
+            available: roomsExist.available + reserExist.quantity
         }
         const roomAva = await Room.findOneAndUpdate({_id: roomsExist}, suma, {new: true});
         const reserDeleted = await Reser.findOneAndDelete({_id: reserExist._id});
         if(!reserDeleted) return res.status(400).send({message: 'No se pudo cancelar la reservacion'});
         return res.send({message: 'Reservacion cancelada'});
-        
+
     }catch(err){
         console.log(err);
         return res.status(500).send({message: 'Error cancelando reservacion'});
     }
 }
-
 exports.payReservation = async(req, res)=>{
     try{
 
@@ -203,37 +182,18 @@ exports.payReservation = async(req, res)=>{
             const roomExist = reserExist.rooms;
             const quantity = roomExist[0];
             const roomsExist = await Room.findOne({_id: quantity.room});
-            const invoExist = await Invoice.findOne({user: userLog});
-            if(invoExist){
-                const invoice = {
-                    hotel: reserExist.hotel,
-                    dateStart: reserExist.dateStart,
-                    days: reserExist.days,
-                    total: reserExist.total,
-                    condition: 'Reservacion Pagada'
-                }
-                const pushInovice = await Invoice.findOneAndUpdate(
-                    {_id: invoExist._id},
-                    { $push: {invoices: invoice}},
-                    {new: true}
-                );
-            }else{
-                const invoice ={
-                    hotel: reserExist.hotel,
-                    dateStart: reserExist.dateStart,
-                    days: reserExist.days,
-                    total: reserExist.total,
-                    condition: 'Reservacion pagada'
-                }
-                const data = {
-                    user: req.user.sub,
-                    invoices: invoice 
-                }
-                const invo = new Invoice(data);
-                await invo.save();
+            const data = {
+                user: req.user.sub,
+                hotel: reserExist.hotel,
+                dateStart: reserExist.dateStart,
+                days: reserExist.days,
+                total: reserExist.total,
+                condition: 'Reservacion pagada'
             }
+            const invo = new Invoice(data);
+            await invo.save();
             const suma ={
-                available: roomsExist.available + quantity.quantity
+                available: roomsExist.available + reserExist.quantity
             }
             const roomAva = await Room.findOneAndUpdate({_id: roomsExist}, suma, {new: true});
             const reserDeleted = await Reser.findOneAndDelete({_id: reserExist._id});
@@ -246,3 +206,4 @@ exports.payReservation = async(req, res)=>{
         return res.status(500).send({message: 'Error realizando el pago de la reservacion'});
     }
 }
+

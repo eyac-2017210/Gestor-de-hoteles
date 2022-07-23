@@ -136,3 +136,15 @@ exports.saveRoomsByAdmin = async(req, res)=>{
         return res.status(500).send({message: 'Error guardando Habitaciones'})
     }
 }
+
+exports.getRoom = async (req, res)=>{
+    try {
+        const roomId = req.params.id;
+        const room = await Room.findOne({_id: roomId })
+        return res.status(200).send({room});
+
+    } catch (error) {
+        console.log(error);
+        return error;
+    }
+};

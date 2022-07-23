@@ -26,10 +26,11 @@ export class RoomsComponent implements OnInit {
     public activateRoute : ActivatedRoute,
     public roomRest: RoomRestService,
     public reservationRest: ReservationRestService,
-    public userRest: UserRestService
+    public userRest: UserRestService,
+    public router: Router
   ) { 
     this.room = new RoomModel('', '', 0, 0, '');
-    this.reservation = new ReservationModel('', '', new Date(), 0, '', [], [], 0);
+    this.reservation = new ReservationModel('', '', new Date(), 0, 0, '', [], [], 0);
   }
 
   ngOnInit(): void {
@@ -52,6 +53,31 @@ export class RoomsComponent implements OnInit {
     })
   };
 
+  getRoom(id: string){
+    this.roomRest.getRoom(id).subscribe({
+      next:(res:any)=>{this.roomUpdate= res.room},
+      error:(err)=>{alert(err.error.message)}
+
+    })
+  };
+
+  addRoomToReservation(addReservationForm:any){
+    this.reservationRest.addRoomToReservation(this.roomUpdate._id, this.reservation).subscribe({
+      next:(res:any)=>{
+        Swal.fire({
+          title: res.message ,
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 2000,
+          position:'center'
+        })
+      addReservationForm.reset();
+      this.router.navigateByUrl('/events/' + this.id);
+      },
+      error:(err)=> alert(err.error.message || err.error)
+    })
+  };
   
+
 
 }
