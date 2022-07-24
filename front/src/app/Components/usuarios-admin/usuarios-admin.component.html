@@ -6,114 +6,102 @@
     <button type="button" class="btn btn-secondary btn-lg btn-card" data-bs-toggle="modal"
 data-bs-target="#exampleModal">Agregar Administrador de Hotel </button>
 </div>
-<section class="mt-5">
-    <!-----Titulo-->
-    <div class="display">
-        <!---Contenedores de Blog-->
-        <div class="contenedores">
-            <!--Caja Uno-->
-            <div class="CajaDeInfo">
-                <!--Imagen de Apartado-->
-                <div class="ImagenInfo">
-
-                </div>
-                <!--Texto-->
-                <div class="textInfo">
-                    <a  class="TituloInfo"> diegof_03</a>
-                    <p>Nombre: Diego Fernando <br>
-                        Apellido: Solís López <br>
-                        Funcion: Admin<br>
-                        Telefono: 58989610
-                    </p>
-                </div>
-            </div>
-        </div>
-        <!---Contenedores de Blog2-->
-        <div class="contenedores">
-            <!--Caja Uno-->
-            <div class="CajaDeInfo">
-                <!--Imagen de Apartado-->
-                <div class="ImagenInfo">
-
-                </div>
-                <!--Texto-->
-                <div class="textInfo">
-
-                    <a  class="TituloInfo">Gmonzon04</a>
-                    <p>Nombre: Edgar Gerardo <br>
-                        Apellido: Monzon Marroquin <br>
-                        Funcion: Admin<br>
-                        Telefono: 7577631
-                    </p>
-                </div>
-            </div>
-        </div>
-        <!---Contenedores de Blog3-->
-        <div class="contenedores">
-            <!--Caja Uno-->
-            <div class="CajaDeInfo">
-                <!--Imagen de Apartado-->
-                <div class="ImagenInfo">
-
-                </div>
-                <!--Texto-->
-                <div class="textInfo">
-
-                    <a  class="TituloInfo">mruiz-2018 </a>
-                    <p>Nombre: Manuel Enrique <br>
-                        Apellido: Ruiz Sequen<br>
-                        Funcion: Admin  <br>
-                        Telefono:  67891234
-                    </p>
-                </div>
-            </div>
-
-
-        </div>
-
-
-
+<div class="text-center row">
+<div *ngFor="let userA of user" class="card me-3 mb-3" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">name:{{userA.name}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">username:{{userA.username}}</h6>
+      <p class="card-subtitle mb-2 text-muted">phone:{{userA.phone}}</p>
+      <p class="card-subtitle mb-2 text-muted">role:{{userA.role}}</p>
+      <button (click)="getUserId(userA._id)" data-bs-toggle="modal" data-bs-target="#updateModal">Editar usuario</button>
+      <button (click)="deleteUserA(userA._id)">Eliminar usuario</button>
     </div>
-</section>
+  </div>
+</div>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"> Agregar Evento </h5>
+                <h5 class="modal-title" id="exampleModalLabel"> Agregar Usuario </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="Centrado">
-                    <span>Nombre: </span>
-                    <input class="ms-2" type="text">
+                    <span for="name">Name: </span>
+                    <input [(ngModel)]="userM.name" class="ms-2" type="text">
                     
                 </div>
                 <div class="Centrado">
-                    <span>Usuario: </span>
-                    <input class="ms-2" type="text">
+                    <span for="surname">Surname: </span>
+                    <input [(ngModel)]="userM.surname" class="ms-2" type="text">
                     
                 </div>
                 <div class="Centrado">
-                    <span>Email: </span>
-                    <input class="ms-2" type="text">
+                    <span for="username">Username: </span>
+                    <input [(ngModel)]="userM.username" class="ms-2" type="text">
                     
                 </div>
                 <div class="Centrado">
-                    <span>Telefono: </span>
-                    <input class="ms-2" type="text">
+                    <span for="email">Email: </span>
+                    <input [(ngModel)]="userM.email" class="ms-2" type="text">
                     
                 </div>
                 <div class="Centrado">
-                    <span>Contraseña: </span>
-                    <input class="ms-2" type="text">
+                    <span for="phone">Phone: </span>
+                    <input [(ngModel)]="userM.phone" class="ms-2" type="text">
+                    
+                </div>
+                <div class="Centrado">
+                    <span for="password">Password: </span>
+                    <input [(ngModel)]="userM.password" class="ms-2" type="text">
                     
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Guardar</button>
+                <button (click)="saveAdminHotel()" type="button" class="btn btn-primary">Guardar</button>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Modal Update -->
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateModalLabel">Actualizar sucursales</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form *ngIf="user"  >
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input [(ngModel)]="this.userUpdate.name" name="name" type="text" class="form-control" id="name" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="surname" class="form-label">Surname</label>
+              <input [(ngModel)]="this.userUpdate.surname" name="surname" type="text" class="form-control" id="surname">
+            </div>
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input [(ngModel)]="this.userUpdate.username" name="username" type="text" class="form-control" id="username">
+              </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input [(ngModel)]="this.userUpdate.email" name="email" type="text" class="form-control" id="email">
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone</label>
+                <input [(ngModel)]="this.userUpdate.phone" name="phone" type="text" class="form-control" id="phone">
+              </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button (click)="updateuserAdmin()"  data-bs-dismiss="modal" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>

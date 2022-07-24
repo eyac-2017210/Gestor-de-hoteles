@@ -153,7 +153,7 @@ exports.cancelReservation = async(req, res)=>{
             dateStart: reserExist.dateStart,
             days: reserExist.days,
             total: reserExist.total,
-            condition: 'Reservacion pagada'
+            condition: 'Reservacion cancelada'
         }
         const invo = new Invoice(data);
         await invo.save();

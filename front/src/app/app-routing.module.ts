@@ -9,6 +9,8 @@ import { EventsComponent } from './Components/events/events.component';
 import { ReservationComponent } from './Components/reservation/reservation.component';
 import { RoomsComponent } from './Components/rooms/rooms.component';
 import { InvoicesComponent } from './Components/invoices/invoices.component';
+import { UsuariosAdminComponent } from './Components/usuarios-admin/usuarios-admin.component';
+import { HotelsAdminComponent } from './Components/hotels-admin/hotels-admin.component';
 
 
 const routes: Routes = [
@@ -17,6 +19,8 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'hotels', component: HotelsComponent},
+  {path: 'userA', component: UsuariosAdminComponent},
+  {path: 'hotelA', component:HotelsAdminComponent},
   {path: 'events/:id', component: EventsComponent},
   {path: 'reservation', component: ReservationComponent},
   {path: 'rooms/:id', component: RoomsComponent},

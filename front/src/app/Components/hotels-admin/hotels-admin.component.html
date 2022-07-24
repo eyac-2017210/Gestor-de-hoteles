@@ -1,1 +1,75 @@
 <app-nav-bar></app-nav-bar>
+<div class="Titulos">
+    <span></span>
+    <h3>Hoteles</h3>
+    <button type="button" class="btn btn-secondary btn-lg btn-card" data-bs-toggle="modal" data-bs-target="#exampleModal">Agregar Hotel </button>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div id="container" *ngFor="let hotel of hotels">		
+	<div class="product-details">		
+	<h1>{{hotel.name}}</h1>
+	<span class="hint-star star">
+		<i class="fa fa-star" aria-hidden="true"></i>
+		<i class="fa fa-star" aria-hidden="true"></i>
+		<i class="fa fa-star" aria-hidden="true"></i>
+		<i class="fa fa-star" aria-hidden="true"></i>
+		<i class="fa fa-star-o" aria-hidden="true"></i>
+	</span>				
+</div>
+<div class="product-image">
+	<img src="../../../assets/img/tridente2.jpg" alt="">
+<div class="info">
+	<h2> Descripción</h2>
+	<ul>
+		<li><strong>Dirección : </strong>{{hotel.direction}}</li>
+		<li><strong>Contacto  : </strong>{{hotel.phone}}</li>
+		<li><strong>Email     : </strong>{{hotel.email}}</li>
+	</ul>
+</div>
+</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">New Hotel:</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+            <form>
+                <div class="mb-3">
+                  <label for="name" class="form-label">Name</label>
+                  <input [(ngModel)]="hotel.name" name="name" type="text" class="form-control" id="name" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                  <label for="direction" class="form-label">Direction</label>
+                  <input [(ngModel)]="hotel.direction" name="direction" type="text" class="form-control" id="direction">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input [(ngModel)]="hotel.email" name="email" type="text" class="form-control" id="email">
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Phone</label>
+                    <input [(ngModel)]="hotel.phone" name="phone" type="text" class="form-control" id="phone">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">User</label>
+                    <select [(ngModel)]="hotel.user" name="user" class="form-select" aria-label="Default select example">
+                        <option value="" disabled>Open this select menu</option>
+                        <option *ngFor="let user of userA" value="{{user._id }}">{{ user.name}}</option>
+                    </select>
+                </div>
+              </form>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+          <button (click)="saveHotels()" type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>

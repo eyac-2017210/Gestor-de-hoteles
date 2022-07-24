@@ -16,5 +16,6 @@ api.get('/getUsers', [mdAuth.ensureAuth, mdAuth.isAdmin], userController.getUser
 api.post('/saveAdminHotel', [mdAuth.ensureAuth, mdAuth.isAdmin], userController.registerAdminH);
 api.put('/updateUserByAdmin/:id', [mdAuth.ensureAuth, mdAuth.isAdmin], userController.updateUser);
 api.delete('/deleteUserByAdmin/:id', [mdAuth.ensureAuth, mdAuth.isAdmin], userController.deleteUser);
+api.get('/getUserId/:id', mdAuth.ensureAuth,userController.getUserId);
 
 module.exports = api;

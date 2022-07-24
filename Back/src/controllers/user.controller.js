@@ -124,7 +124,7 @@ exports.saveAdmin = async(req, res)=>{
 exports.getUsers = async(req, res)=>{
     try{
         const users = await User.find().lean();
-        if(users.lenght == 0) {
+        if(users.length == 0) {
             res.status(400).send({message: 'Usuarios no encontrados'});
         } else {
             return res.send({users});
@@ -201,5 +201,15 @@ exports.deleteUser = async(req, res)=>{
     }catch(err){
         console.log(err);
         return res.status(500).send({message: 'Error eliminando al usuario'});
+    }
+}
+exports.getUserId = async(req, res)=>{
+    try{
+        const userId = req.params.id;
+        const usersA = await User.findOne({_id: userId});
+        return res.send({usersA});
+    }catch(err){
+        console.log(err);
+        return res.status(500).send({err, message: 'Error getting sucu'});
     }
 }

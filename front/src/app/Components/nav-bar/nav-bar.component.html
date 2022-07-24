@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light ">
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="">Sucursales</a>
+    <a class="navbar-brand" routerLink="">Hoteles</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -17,7 +17,14 @@
           <a  class="btn btn-danger" aria-current="page" routerLink="/reservation" style="color: black;">Reservación</a>
         </li>
         
-        
+        <li *ngIf="role == 'ADMIN'" class="nav-item" style=" border-radius: 40%; padding: 3px;">
+          <a  class="btn btn-danger" aria-current="page" routerLink="/hotelA" style="color: black;">Hoteles</a>
+        </li>
+
+        <li *ngIf="role == 'ADMIN'" class="nav-item" style=" border-radius: 40%; padding: 3px;">
+          <a  class="btn btn-danger" aria-current="page" routerLink="/userA" style="color: black;">Usuarios</a>
+        </li>
+
         <li *ngIf="role == 'CLIENT'" class="nav-item" style=" border-radius: 40%; padding: 3px;">
           <a  class="btn btn-danger" aria-current="page" routerLink="/invoices" style="color: black;">Facturas</a>
         </li>

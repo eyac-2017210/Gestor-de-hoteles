@@ -19,4 +19,7 @@ export class HotelRestService {
   getHotels(){
     return this.http.get(environment.baseUrl + 'hotel/getHotels', {headers:this.httOptions});
   };
+  saveHotels(params:{}){
+    return this.http.post(environment.baseUrl + 'hotel/saveHotel',params, {headers:this.httOptions});
+  }
 }
