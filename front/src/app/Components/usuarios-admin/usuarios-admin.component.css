@@ -30,7 +30,10 @@ body{
 .btn{
     padding: 1rem;
     background-color: #223741;
+    transition: 0.3s linear;
 }
+.btn:hover{transform: translateY(-6px);
+	background: #1a66ff;}
 .btn-card{
  margin-bottom: 0.5rem;
 }
@@ -60,20 +63,24 @@ body{
 }
 .contenedores{
     display: flex;
-    justify-content: none;
     align-items: none;
     margin: 0px 0px;
     flex-wrap: wrap;
+    justify-content: center;
     
 
 }
 .CajaDeInfo{
-    width: 400px;
-    background-color: #C1C1C1;
+   width: 400px;
+    background-color: #eeeec4;
     border: 1px solid;
     margin: 20px;
     float: left;
     border-radius: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    
     
     
 }
@@ -81,6 +88,10 @@ body{
 .ImagenInfo{
     width: 100%;
     height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    
 
 }
 .ImagenInfo img{

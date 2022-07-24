@@ -30,6 +30,7 @@ body{
     padding: 1rem;
     background-color: #223741;
 }
+
 .btn-card{
  margin-bottom: 0.5rem;
 }
@@ -261,10 +262,10 @@ font-family: 'EB Garamond', serif;
 	
 }
 .btn {
-
+    font-size: 24px;
 	transform: translateY(0px);
 	transition: 0.3s linear;
-	background:  #809fff;
+	background:  #223741;
 	border-radius: 5px;
   position: relative;
   overflow: hidden;
@@ -273,7 +274,10 @@ font-family: 'EB Garamond', serif;
 	border: none;
 	color: #eee;
 	padding: 0;
-	margin: 0;
+	margin: 2px;
+    width: 100px;
+    height: 45px;
+	
 	
 }
 

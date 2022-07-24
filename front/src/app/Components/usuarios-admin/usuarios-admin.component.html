@@ -6,18 +6,38 @@
     <button type="button" class="btn btn-secondary btn-lg btn-card" data-bs-toggle="modal"
 data-bs-target="#exampleModal">Agregar Administrador de Hotel </button>
 </div>
-<div class="text-center row">
-<div *ngFor="let userA of user" class="card me-3 mb-3" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">name:{{userA.name}}</h5>
-      <h6 class="card-subtitle mb-2 text-muted">username:{{userA.username}}</h6>
-      <p class="card-subtitle mb-2 text-muted">phone:{{userA.phone}}</p>
-      <p class="card-subtitle mb-2 text-muted">role:{{userA.role}}</p>
-      <button (click)="getUserId(userA._id)" data-bs-toggle="modal" data-bs-target="#updateModal">Editar usuario</button>
-      <button (click)="deleteUserA(userA._id)">Eliminar usuario</button>
-    </div>
+<section class="mt-5">
+  <!-----Titulo-->
+  <div class="display">
+      <!---Contenedores de Blog-->
+      <div class="contenedores" *ngFor="let userA of user">
+          <!--Caja Uno-->
+          <div class="CajaDeInfo">
+            <div  class="ImagenInfo" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">Nombre: {{userA.name}}</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">Nombre de usuario: {{userA.username}}</h6>
+                  <p class="card-subtitle mb-2 text-muted">Teléfono: {{userA.phone}}</p>
+                  <p class="card-subtitle mb-2 text-muted">role: {{userA.role}}</p>
+                  <button (click)="getUserId(userA._id)" data-bs-toggle="modal"class="btn btn-secondary" data-bs-target="#updateModal">Editar usuario</button>
+                  <button (click)="deleteUserA(userA._id)"class="btn btn-secondary">Eliminar usuario</button>
+                </div>
+              </div>
+            </div>
+      </div>
+
   </div>
-</div>
+</section>
+
+
+
+
+
+
+
+
+
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -27,36 +47,38 @@ data-bs-target="#exampleModal">Agregar Administrador de Hotel </button>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="Centrado">
-                    <span for="name">Name: </span>
-                    <input [(ngModel)]="userM.name" class="ms-2" type="text">
+              <form>
+                <div class="mb-3">
+                    <span for="name">Nombre: </span>
+                    <input [(ngModel)]="userM.name" name="name" id="name" class="form-control" type="text">
                     
                 </div>
-                <div class="Centrado">
-                    <span for="surname">Surname: </span>
-                    <input [(ngModel)]="userM.surname" class="ms-2" type="text">
+                <div class="mb-3">
+                    <span for="surname">Apellido: </span>
+                    <input [(ngModel)]="userM.surname"name="surname" id="surname" class="form-control" type="text">
                     
                 </div>
-                <div class="Centrado">
-                    <span for="username">Username: </span>
-                    <input [(ngModel)]="userM.username" class="ms-2" type="text">
+                <div class="mb-3">
+                    <span for="username">Usuario: </span>
+                    <input [(ngModel)]="userM.username" name="username" id="username" class="form-control" type="text">
                     
                 </div>
-                <div class="Centrado">
+                <div class="mb-3">
                     <span for="email">Email: </span>
-                    <input [(ngModel)]="userM.email" class="ms-2" type="text">
+                    <input [(ngModel)]="userM.email" name="email" id="email" class="form-control" type="text">
                     
                 </div>
-                <div class="Centrado">
-                    <span for="phone">Phone: </span>
-                    <input [(ngModel)]="userM.phone" class="ms-2" type="text">
+                <div class="mb-3">
+                    <span for="phone">Teléfono: </span>
+                    <input [(ngModel)]="userM.phone" name="phone" id="phone" class="form-control" type="text">
                     
                 </div>
-                <div class="Centrado">
-                    <span for="password">Password: </span>
-                    <input [(ngModel)]="userM.password" class="ms-2" type="text">
+                <div class="mb-3">
+                    <span for="password">Contraseña: </span>
+                    <input [(ngModel)]="userM.password" name="password" id="password" class="form-control" type="text">
                     
                 </div>
+              </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -71,36 +93,36 @@ data-bs-target="#exampleModal">Agregar Administrador de Hotel </button>
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="updateModalLabel">Actualizar sucursales</h5>
+          <h5 class="modal-title" id="updateModalLabel">Actualizar Usuario</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <form *ngIf="user"  >
             <div class="mb-3">
-              <label for="name" class="form-label">Name</label>
+              <label for="name" class="form-label">Nombre:</label>
               <input [(ngModel)]="this.userUpdate.name" name="name" type="text" class="form-control" id="name" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
-              <label for="surname" class="form-label">Surname</label>
+              <label for="surname" class="form-label">Apellido:</label>
               <input [(ngModel)]="this.userUpdate.surname" name="surname" type="text" class="form-control" id="surname">
             </div>
             <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
+                <label for="username" class="form-label">Nombre de usuario:</label>
                 <input [(ngModel)]="this.userUpdate.username" name="username" type="text" class="form-control" id="username">
               </div>
             <div class="mb-3">
-              <label for="email" class="form-label">Email</label>
+              <label for="email" class="form-label">Email:</label>
               <input [(ngModel)]="this.userUpdate.email" name="email" type="text" class="form-control" id="email">
             </div>
             <div class="mb-3">
-                <label for="phone" class="form-label">Phone</label>
+                <label for="phone" class="form-label">Teléfono:</label>
                 <input [(ngModel)]="this.userUpdate.phone" name="phone" type="text" class="form-control" id="phone">
               </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button (click)="updateuserAdmin()"  data-bs-dismiss="modal" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button (click)="updateuserAdmin()"  data-bs-dismiss="modal" class="btn btn-primary">Guardar</button>
         </div>
       </div>
     </div>
