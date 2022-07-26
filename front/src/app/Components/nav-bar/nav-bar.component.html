@@ -25,6 +25,13 @@
           <a  class="btn btn-danger" aria-current="page" routerLink="/userA" style="color: black;">Usuarios</a>
         </li>
 
+        <li *ngIf="role == 'ADMINH'" class="nav-item" style=" border-radius: 40%; padding: 3px;">
+          <a  class="btn btn-danger" aria-current="page" routerLink="/hotelesAdminH" style="color: black;">Hoteles</a>
+        </li>
+        <li *ngIf="role == 'ADMINH'" class="nav-item" style=" border-radius: 40%; padding: 3px;">
+          <a  class="btn btn-danger" aria-current="page" routerLink="/userAdminH" style="color: black;">Usuarios</a>
+        </li>
+
         <li *ngIf="role == 'CLIENT'" class="nav-item" style=" border-radius: 40%; padding: 3px;">
           <a  class="btn btn-danger" aria-current="page" routerLink="/invoices" style="color: black;">Facturas</a>
         </li>

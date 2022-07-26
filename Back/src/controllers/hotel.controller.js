@@ -173,3 +173,17 @@ exports.usersByHotel = async(req, res)=>{
         return res.status(500).send({message: 'Error obteniendo usuarios por hotel'})
     }
 }
+
+exports.getHotelByAdmin = async(req, res)=>{
+    try{
+
+        const userLog = req.user.sub;
+        const hotelExist = await Hotel.findOne({user: userLog});
+        if (!hotelExist) return res.status(400).send({message: 'Error obteniendo el hotel'});
+        return res.send({message: 'Hotel encontrado', hotelExist});
+
+    }catch(err){
+        console.log(err);
+        return res.status(500).send({message: 'Error obteniendo el hotel'});
+    }
+}

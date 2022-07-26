@@ -24,4 +24,20 @@ export class EventRestService {
   getEvent(id: string){
     return this.http.get(environment.baseUrl + 'event/getEvent/' + id, {headers:this.httOptions});
   };
+  getEventsByAdmin(){
+    return this.http.get(environment.baseUrl + 'event/getEventsByHotel', {headers:this.httOptions});
+  };
+
+  saveEvent(params:{}){
+    return this.http.post(environment.baseUrl + 'event/saveEvent/', params, {headers:this.httOptions});
+  };
+
+  updateEvent(id:string, params:{}){
+    return this.http.put(environment.baseUrl + 'event/updateEvent/' + id, params, {headers: this.httOptions})
+  }
+
+  deleteEvent(id: string){
+    return this.http.delete(environment.baseUrl + 'event/deleteEvent/' + id, {headers:this.httOptions});
+  };
+
 }

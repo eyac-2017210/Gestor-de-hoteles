@@ -1,4 +1,3 @@
-
 a{
     text-decoration: none;
 }
@@ -29,7 +28,13 @@ body{
 }
 .btn{
     padding: 1rem;
+    margin: 2px;
     background-color: #223741;
+}
+.btn:hover{
+    background: #1a66ff;
+    transition: 0.3s linear;
+
 }
 .btn-card{
  margin-bottom: 0.5rem;

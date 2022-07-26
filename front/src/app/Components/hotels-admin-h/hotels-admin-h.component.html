@@ -1,1 +1,74 @@
 <app-nav-bar></app-nav-bar>
+<div class="Titulos">
+  <span></span>
+  <h3>Hoteles</h3>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div id="container">
+  <div class="product-details">
+    <h1>{{hotels.name}}</h1>
+    <span class="hint-star star">
+      <i class="fa fa-star" aria-hidden="true"></i>
+      <i class="fa fa-star" aria-hidden="true"></i>
+      <i class="fa fa-star" aria-hidden="true"></i>
+      <i class="fa fa-star" aria-hidden="true"></i>
+      <i class="fa fa-star-o" aria-hidden="true"></i>
+    </span>
+    <br> 
+    <br>
+    <button (click)="getHotelById(hotels._id)" class="btn btn-warning mb-2" data-bs-toggle="modal" data-bs-target="#updateModal">Editar Hotel</button>
+     
+      
+  </div>
+  <div class="product-image">
+    <img src="../../../assets/img/tridente2.jpg" alt="">
+    <div class="info">
+      <h2> Descripción</h2>
+      <ul>
+        <li><strong>Dirección : </strong>{{hotels.direction}}</li>
+        <li><strong>Contacto : </strong>{{hotels.phone}}</li>
+        <li><strong>Email : </strong>{{hotels.email}}</li>
+        <button routerLink='/roomAdminH' class="button-50" role="button" style="margin-top: 10%; margin-left: 8%;">HABITACIONES</button>
+        <br>
+        <button routerLink='/eventosAdminH' class="button-50" role="button" style="margin-top: 10%; margin-left: 13%;">EVENTOS</button>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- Modal Update -->
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateModalLabel">Actualizar Hotel</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form *ngIf="hotel"  >
+            <div class="mb-3">
+              <label for="name" class="form-label">Nombre:</label>
+              <input [(ngModel)]="this.hotelUpdate.name" name="name" type="text" class="form-control" id="name" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="direction" class="form-label">Dirección:</label>
+              <input [(ngModel)]="this.hotelUpdate.direction" name="direction" type="text" class="form-control" id="direction">
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Teléfono:</label>
+                <input [(ngModel)]="this.hotelUpdate.phone" name="phone" type="text" class="form-control" id="phone">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <input [(ngModel)]="this.hotelUpdate.email" name="email" type="text" class="form-control" id="email">
+            </div>
+            
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button (click)="updateHotel()"  data-bs-dismiss="modal" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>

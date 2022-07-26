@@ -10,7 +10,7 @@ data-bs-target="#exampleModal">Agregar Evento </button>
     <!-----Titulo-->
     <div class="display">
         <!---Contenedores de Blog-->
-        <div class="contenedores">
+        <div class="contenedores" *ngFor="let event of events">
             <!--Caja Uno-->
             <div class="CajaDeInfo">
                 <!--Imagen de Apartado-->
@@ -19,57 +19,21 @@ data-bs-target="#exampleModal">Agregar Evento </button>
                 </div>
                 <!--Texto-->
                 <div class="textInfo">
-                    <a href="#" class="TituloInfo">Banana Splash</a>
-                    <p>
-                        Precio 20$ por Persona 
+                    <a  class="TituloInfo">{{event.name}}</a>
+                    <p>Precio: Q.{{event.price}}</p>
+                    <p>Descripción del Evento
                     </p>
+                    <label for="exampleInputEmail1" class="form-label" style="text-align: center; font-weight: bold; font-size: 25px;">{{event.description}}</label>                    
+                    
+                    <button (click)="getEventsById(event._id)" data-bs-toggle="modal"class="btn btn-secondary" data-bs-target="#updateModal">Editar Evento</button>
+                    <button (click)="deleteEvent(event._id)"class="btn btn-secondary">Eliminar Evento</button>
                 </div>
             </div>
         </div>
-        <!---Contenedores de Blog2-->
-        <div class="contenedores">
-            <!--Caja Uno-->
-            <div class="CajaDeInfo">
-                <!--Imagen de Apartado-->
-                <div class="ImagenInfo">
-
-                </div>
-                <!--Texto-->
-                <div class="textInfo">
-
-                    <a href="#" class="TituloInfo">Party Yacht</a>
-                    <p>
-                       Precio de 120$
-                    </p>
-                </div>
-            </div>
-        </div>
-        <!---Contenedores de Blog3-->
-        <div class="contenedores">
-            <!--Caja Uno-->
-            <div class="CajaDeInfo">
-                <!--Imagen de Apartado-->
-                <div class="ImagenInfo">
-
-                </div>
-                <!--Texto-->
-                <div class="textInfo">
-
-                    <a href="#" class="TituloInfo">Torneo de Ping Pong </a>
-                        <p>
-                        
-                           Precio 20$
-                        </p>
-                </div>
-            </div>
-
-
-        </div>
-
-
 
     </div>
 </section>
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -80,21 +44,64 @@ data-bs-target="#exampleModal">Agregar Evento </button>
             </div>
             <div class="modal-body">
                 <div class="Centrado">
-                    <span>Nombre del Evento: </span>
-                    <input class="ms-2" type="text">
-                    
+                    <div class="content-text p-4">
+                        <form  #addRoomsForm="ngForm" >
+                            <div class="form-group">
+                                <label for="name">Nombre del Evento</label>
+                                <input [(ngModel)]="event.name" name="name" type="text" class="form-control" id="name" placeholder="Nombre del Evento">
+                            </div>
+                          <br>
+                          <div class="form-group">
+                            <label for="price">Precio</label>
+                            <input [(ngModel)]="event.price" name="price" type="number" class="form-control" id="price" placeholder="Precio">
+                          </div>
+                          <br>
+                          <div class="form-group">
+                            <label for="description">Descripción</label>
+                            <input [(ngModel)]="event.description"  name="description"   type="text" class="form-control" id="description" placeholder="Descripción">
+                          </div>
+                        </form>
+                      </div>
                 </div>
-                <div class="Centrado">
-                    <span>Precio del Evento: </span>
-                    <input class="ms-2" type="text">
-                    
-                </div>
-               
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Guardar</button>
+                <button (click)="saveEvent(addRoomsForm)" type="button" class="btn btn-primary">Guardar</button>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Modal Update -->
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateModalLabel">Actualizar Evento</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form *ngIf="event"  >
+            <div class="mb-3">
+              <label for="name" class="form-label">Nombre del Evento:</label>
+              <input [(ngModel)]="this.updateEvent.name" name="name" type="text" class="form-control" id="name" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="price" class="form-label">Precio:</label>
+                <input [(ngModel)]="this.updateEvent.price" name="price" type="number" class="form-control" id="price">
+            </div>
+            <div class="mb-3">
+              <label for="description" class="form-label">Descripción:</label>
+              <input [(ngModel)]="this.updateEvent.description" name="description" type="text" class="form-control" id="description">
+            </div>
+            
+            
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button (click)="eventUpdate()"  data-bs-dismiss="modal" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>

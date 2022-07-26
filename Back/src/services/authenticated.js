@@ -36,7 +36,7 @@ exports.isAdmin = async (req, res, next)=>{
 exports.isAdminHo = async (req, res, next)=>{
     try{
         const user = req.user;
-        if(user.role === 'ADMIN' || user.role === 'ADMINH') return next();
+        if( user.role === 'ADMINH') return next();
         else return res.status(403).send({message: 'Usuario no autorizado'})
     }catch(err){
         console.log(err);

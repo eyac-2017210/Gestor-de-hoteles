@@ -4,13 +4,13 @@
     <span></span>
     <h3>Habitaciones</h3>
     <button type="button" class="btn btn-secondary btn-lg btn-card" data-bs-toggle="modal"
-data-bs-target="#exampleModal">Agregar Habitacion </button>
+data-bs-target="#exampleModal">Agregar Habitación </button>
 </div>
 <section class="mt-5">
     <!-----Titulo-->
     <div class="display">
         <!---Contenedores de Blog-->
-        <div class="contenedores">
+        <div class="contenedores" *ngFor="let room of rooms">
             <!--Caja Uno-->
             <div class="CajaDeInfo">
                 <!--Imagen de Apartado-->
@@ -19,69 +19,19 @@ data-bs-target="#exampleModal">Agregar Habitacion </button>
                 </div>
                 <!--Texto-->
                 <div class="textInfo">
-                    <a  class="TituloInfo">Single</a>
+                    <a  class="TituloInfo">{{room.type}}</a>
                     <p>Cantidad de Habitaciones Disponibles
                     </p>
-                    
-                    <p>Precio 280$</p>
-                    
+                    <label for="exampleInputEmail1" class="form-label" style="text-align: center; font-weight: bold; font-size: 25px;">{{room.available}}</label>                    
+                    <p>Precio: Q.{{room.price}}</p>
+                    <button (click)="getRoom(room._id)" data-bs-toggle="modal"class="btn btn-secondary" data-bs-target="#updateModal">Editar Habitación</button>
+                    <button (click)="deleteRoom(room._id)"class="btn btn-secondary">Eliminar Habitación</button>
                 </div>
             </div>
         </div>
-        <!---Contenedores de Blog2-->
-        <div class="contenedores">
-            <!--Caja Uno-->
-            <div class="CajaDeInfo">
-                <!--Imagen de Apartado-->
-                <div class="ImagenInfo">
-
-                </div>
-                <!--Texto-->
-                <div class="textInfo">
-
-                    <a  class="TituloInfo">Duo</a>
-                    <p>Cantidad de Habitaciones Disponibles
-                    </p>
-                    
-                    <p>Precio 370$</p>
-                    
-                </div>
-            </div>
-        </div>
-        <!---Contenedores de Blog3-->
-        <div class="contenedores">
-            <!--Caja Uno-->
-            <div class="CajaDeInfo">
-                <!--Imagen de Apartado-->
-                <div class="ImagenInfo">
-
-                </div>
-                <!--Texto-->
-                <div class="textInfo">
-
-                    <a  class="TituloInfo">Suite</a>
-                    <p>Cantidad de Habitaciones DIsponibles 
-                    </p>
-                    
-                    <p>Precio 500$</p>
-                    
-                </div>
-            </div>
-            <!--Modal-->
-
-
-        </div>
-
-
 
     </div>
 </section>
-
-
-
-
-
-
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -93,24 +43,63 @@ data-bs-target="#exampleModal">Agregar Habitacion </button>
             </div>
             <div class="modal-body">
                 <div class="Centrado">
-                    <span>Tipo de Habitacion</span>
-                    <input class="ms-2" type="text">
-                    
-                </div>
-                <div class="Centrado">
-                    <span>Precio por Habitacion</span>
-                    <input class="ms-2" type="text">
-                    
-                </div>
-                <div>
-                    <span>Cantidad por Habitacion</span>
-                    <input class="ms-2" type="text">
+                    <div class="content-text p-4">
+                        <form  #addRoomsForm="ngForm" >
+                            <div class="form-group">
+                                <label for="type">Tipo de Habitación</label>
+                                <input [(ngModel)]="room.type" name="type" type="text" class="form-control" id="type" placeholder="Tipo">
+                            </div>
+                          <br>
+                          <div class="form-group">
+                            <label for="available">Cantidad de habitaciones</label>
+                            <input [(ngModel)]="room.available"  name="available"   type="number" class="form-control" id="available" placeholder="Disponibilidad">
+                          </div>
+                          <br>
+                          <div class="form-group">
+                            <label for="price">Precio</label>
+                            <input [(ngModel)]="room.price" name="price" type="number" class="form-control" id="price" placeholder="Precio">
+                          </div>
+                        </form>
+                      </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Guardar</button>
+                <button (click)="saveRoom(addRoomsForm)" type="button" class="btn btn-primary">Guardar</button>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Modal Update -->
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateModalLabel">Actualizar Habitación</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form *ngIf="room"  >
+            <div class="mb-3">
+              <label for="type" class="form-label">Tipo:</label>
+              <input [(ngModel)]="this.roomUpdate.type" name="type" type="text" class="form-control" id="type" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="available" class="form-label">Disponibles:</label>
+              <input [(ngModel)]="this.roomUpdate.available" name="available" type="number" class="form-control" id="available">
+            </div>
+            <div class="mb-3">
+                <label for="price" class="form-label">Precio:</label>
+                <input [(ngModel)]="this.roomUpdate.price" name="price" type="number" class="form-control" id="price">
+              </div>
+            
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button (click)="updateRoom()"  data-bs-dismiss="modal" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
