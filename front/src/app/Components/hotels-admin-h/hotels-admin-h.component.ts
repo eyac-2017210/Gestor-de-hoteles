@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HotelModel } from 'src/app/models/hotels.model';
 import { HotelRestService } from 'src/app/services/hotelRest/hotel-rest.service';
 import { UserAdminService } from 'src/app/services/userAdmin/user-admin.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-hotels-admin-h',
@@ -65,12 +66,24 @@ export class HotelsAdminHComponent implements OnInit {
 
   updateHotel(){
     this.hotelRest.updateHotel(this.hotelUpdate._id, this.hotelUpdate).subscribe({
-      next: (res:any)=>{alert(res.message);
+      next: (res:any)=>{
+        Swal.fire({
+          title: res.message ,
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 2000,
+          position:'center'
+        })
         this.getHotels();
       },
-      error: (err)=> alert(err.error.message || err.error)
-    });
-  }
-
-
+      error:(err)=>{
+        Swal.fire({
+        title: err.error.message,
+        icon: 'error',
+        timer: 4000,
+        position:'center'
+        })
+      }
+    })
+  };
 }

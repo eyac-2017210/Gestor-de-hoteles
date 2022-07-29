@@ -1,4 +1,10 @@
 <app-nav-bar></app-nav-bar>
+
+<input [(ngModel)]="search"  type="search" placeholder="Busca tu Hotel por nombre" id="Buscador" />
+
+<input [(ngModel)]="searchD"  type="search" placeholder="Busca tu Hotel por dirección" id="Buscador" />
+
+
 <div class="Titulos">
     <span></span>
     <h3>Hoteles</h3>
@@ -6,7 +12,7 @@
 </div>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<div id="container" *ngFor="let hotel of hotels">		
+<div id="container" *ngFor="let hotel of hotels | searchHotelByName: search | searchHotelByDirection: searchD">		
 	<div class="product-details">		
 	<h1>{{hotel.name}}</h1>
 	<span class="hint-star star">
@@ -25,6 +31,7 @@
 		<li><strong>Dirección : </strong>{{hotel.direction}}</li>
 		<li><strong>Contacto  : </strong>{{hotel.phone}}</li>
 		<li><strong>Email     : </strong>{{hotel.email}}</li>
+    <li><strong>Administrador   : </strong>{{hotel.user.username}}</li>
 	</ul>
 </div>
 </div>
@@ -40,7 +47,7 @@
         </div>
         <div class="modal-body">
           
-            <form>
+            <form #addHotelsForm="ngForm">
                 <div class="mb-3">
                   <label for="name" class="form-label">Nombre:</label>
                   <input [(ngModel)]="hotel.name" name="name" type="text" class="form-control" id="name" aria-describedby="emailHelp">
@@ -61,7 +68,7 @@
                     <label class="form-label">Usuario</label>
                     <select [(ngModel)]="hotel.user" name="user" class="form-select" aria-label="Default select example">
                         <option value="" disabled>Seleccionar Administrador</option>
-                        <option *ngFor="let user of userA" value="{{user._id }}">{{ user.name}}</option>
+                        <option *ngFor="let user of userA" value="{{user._id }}">{{ user.username}}</option>
                     </select>
                 </div>
               </form>
@@ -69,7 +76,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
-          <button (click)="saveHotels()" type="submit" class="btn btn-primary">Guardar</button>
+          <button (click)="saveHotels(addHotelsForm)" data-bs-dismiss="modal" type="button" class="btn btn-primary">Guardar</button>
         </div>
       </div>
     </div>

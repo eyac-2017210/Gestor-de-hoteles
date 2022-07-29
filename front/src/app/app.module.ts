@@ -21,6 +21,8 @@ import { EventsAdminHComponent } from './Components/events-admin-h/events-admin-
 import { UsuariosAdminHComponent } from './Components/usuarios-admin-h/usuarios-admin-h.component';
 import { UsuariosAdminComponent } from './Components/usuarios-admin/usuarios-admin.component';
 import { InvoicesComponent } from './Components/invoices/invoices.component';
+import { SearchHotelByNamePipe } from './pipes/search-hotel-by-name.pipe';
+import { SearchHotelByDirectionPipe } from './pipes/search-hotel-by-direction.pipe';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { InvoicesComponent } from './Components/invoices/invoices.component';
     EventsAdminHComponent,
     UsuariosAdminHComponent,
     UsuariosAdminComponent,
-    InvoicesComponent
+    InvoicesComponent,
+    SearchHotelByNamePipe,
+    SearchHotelByDirectionPipe
   ],
   imports: [
     BrowserModule,

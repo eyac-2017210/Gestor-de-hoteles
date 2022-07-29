@@ -25,6 +25,9 @@ exports.saveRoom = async(req, res)=>{
             hotel: hotelExist._id
         }
 
+        if(params.price <= 0) return res.status(400).send({message: 'No se puede agregar un precio menor o igual a 0'});
+        if(params.available <= 0) return res.status(400).send({message: 'No se pueden agregar cantidad de habitaciones menor o igual a 0'});
+
         const msg = validateData(data);
         if(msg) return res.status(400).send(msg);
         const typeExist = await Room.findOne({type: {$regex: params.type, $options: 'i'}, hotel: hotelExist._id});
@@ -54,6 +57,8 @@ exports.updateRoom = async(req, res)=>{
         if(hotelExist.user != req.user.sub && userExist.role != 'ADMIN') return res.status(400).send({message: 'No tienes permiso para actulizar esta habitacion'});
         const typeExist = await Room.findOne({type: {$regex: params.type, $options: 'i'}, hotel: hotelExist._id});
         if(typeExist) return res.status(400).send({message: 'Este tipo de habitacion ya esta registrada en el hotel'});
+        if(params.price <= 0) return res.status(400).send({message: 'No se puede agregar un precio menor o igual a 0'});
+        if(params.available <= 0) return res.status(400).send({message: 'No se pueden agregar cantidad de habitaciones menor o igual a 0'});
         const roomUpdated = await Room.findOneAndUpdate({_id: roomId}, params, {new: true});
         if(!roomUpdated) return res.status(400).send({message: 'Habitacion no actualizada'});
         return res.send({message: 'Habitacion actualizada satisfactoriamente'});

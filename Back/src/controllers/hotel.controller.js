@@ -84,7 +84,7 @@ exports.deleteHotel = async(req, res)=>{
 
 exports.getHotels = async(req, res)=>{
     try{
-        const hoteles = await Hotel.find()
+        const hoteles = await Hotel.find().populate('user')
         .lean();
         return res.send({message: 'Hoteles encontrados', hoteles});
     }catch(err){

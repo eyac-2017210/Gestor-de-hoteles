@@ -10,7 +10,10 @@ import { HotelRestService } from 'src/app/services/hotelRest/hotel-rest.service'
 export class HotelsComponent implements OnInit {
   hotelUpdate: any;
   hotels: any =[] ;
+  query = '';
   hotel: HotelModel;
+  search: any;
+  searchD: any;
 
   constructor(
     private hotelRest: HotelRestService,

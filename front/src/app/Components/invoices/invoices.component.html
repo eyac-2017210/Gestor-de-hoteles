@@ -5,11 +5,11 @@
     <h3>Facturas</h3>
 </div>
 
-<section class="mt-5" *ngFor="let invoice of invoices">
+<section class="mt-5" >
     <!-----Titulo-->
     <div class="display">
         <!---Contenedores de Blog-->
-        <div class="contenedores">
+        <div class="contenedores" *ngFor="let invoice of invoices">
             <!--Caja Uno-->
             <div class="CajaDeInfo">
                 <!--Imagen de Apartado-->
@@ -23,7 +23,6 @@
                        <br> Noches: {{invoice.days}}
                        <br> Total: {{invoice.total}}
                        <br> Estado: {{invoice.condition}}
-                       <br> Usuario: {{invoice.user.name}}
                     </p>
                     
                 </div>

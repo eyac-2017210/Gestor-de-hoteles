@@ -1,7 +1,12 @@
 <app-nav-bar></app-nav-bar>
 
+<input [(ngModel)]="search"  type="search" placeholder="Busca tu Hotel por nombre" id="Buscador" />
+
+<input [(ngModel)]="searchD"  type="search" placeholder="Busca tu Hotel por dirección" id="Buscador" />
+
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<div id="container" *ngFor="let hotel of hotels">	
+<div id="container" *ngFor="let hotel of hotels | searchHotelByName: search | searchHotelByDirection: searchD">	
 	
 	<div class="product-details">
 		

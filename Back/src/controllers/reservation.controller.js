@@ -29,6 +29,8 @@ exports.addRoomsToReservation = async(req, res)=>{
         const reserExist = await Reser.findOne({user: userLog});
         const roomExist = await Room.findOne({_id: roomId})
         .lean();
+        if(params.days <= 0) return res.status(400).send({message: 'No se puede agregar la reservacion con dias menores o iguales a 0'});
+        if(params.quantity <= 0) return res.status(400).send({message: 'No se puede agregar cantidad de habitaciones menor o igual a 0'})
         if(!roomExist) return res.status(400).send({message: 'Habitacion Inexistente'});
         if(reserExist){
             if(params.quantity > roomExist.available) return res.status(400).send({message: 'No contamos con suficientes habitaciones para la cantidad deseada'});
@@ -177,7 +179,9 @@ exports.payReservation = async(req, res)=>{
         const params = req.body;
         const userLog = req.user.sub;
         const reserExist = await Reser.findOne({user: userLog});
+        if(!reserExist) return res.status(400).send({message: 'Para poder realizar el pago, haga una reservacion'});
         const pay = params.pay;
+        if(pay <= 0) return res.status(400).send({message: 'Porfavor, coloque un valor mayor al total a pagar'})
         if(pay>=reserExist.total){
             const roomExist = reserExist.rooms;
             const quantity = roomExist[0];

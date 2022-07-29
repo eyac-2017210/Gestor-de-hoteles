@@ -25,6 +25,8 @@ exports.saveEvent = async(req, res)=>{
             hotel: hotelExist._id
         }
 
+        if(params.price <= 0) return res.status(400).send({message: 'No se pueden agregar un precio menor a 0'});
+
         const msg = validateData(data);
         if(msg) return res.status(400).send(msg);
         const nameExist = await Event.findOne({name: {$regex: params.name, $options: 'i'}, hotel: hotelExist._id});
@@ -52,8 +54,9 @@ exports.updateEvent = async(req, res)=>{
         const hotelExist = await Hotel.findOne({_id: eventExist.hotel});
         const userExist = await User.findOne({_id: req.user.sub});
         if(hotelExist.user != req.user.sub && userExist.role != 'ADMIN') return res.status(400).send({message: 'No tienes permiso para actulizar este evento'});
-        const nameExist = await Event.findOne({name: {$regex: params.name, $options: 'i'}, hotel: hotelExist._id})
-        if(nameExist) return res.status(400).send({message: 'Este evento ya existe en este hotel'})
+        const nameExist = await Event.findOne({name: {$regex: params.name, $options: 'i'}, hotel: hotelExist._id});
+        if(nameExist) return res.status(400).send({message: 'Este evento ya existe en este hotel'});
+        if(params.price <= 0) return res.status(400).send({message: 'No se puede actualizar a un numero menor o igual a 0, coloque otro'});
         const eventUpdated = await Event.findOneAndUpdate({_id: eventId}, params, {new: true});
         if(!eventUpdated) return res.status(400).send({message: 'Evento no actualizado'});
         return res.send({message: 'Evento actualizado satisfactoriamente'});

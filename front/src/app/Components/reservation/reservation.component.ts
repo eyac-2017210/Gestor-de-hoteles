@@ -38,7 +38,6 @@ export class ReservationComponent implements OnInit {
     this.reservationRest.getReservation().subscribe({
       next:(res:any)=>{
         this.reservations= res.reserExist;
-        console.log(res.reserExist)
       },
       error: (err) => console.log(err.error.message || err.error)
     })
@@ -75,8 +74,8 @@ export class ReservationComponent implements OnInit {
           timer: 2000,
           position:'center'
         })
-        this.getReservation();
         addPayForm.reset();
+        this.getReservation();
       },
       error:(err)=>Swal.fire({
         title: err.error.message,

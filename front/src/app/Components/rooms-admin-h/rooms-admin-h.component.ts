@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RoomRestService } from 'src/app/services/roomRest/room-rest.service';
 import { RoomModel } from 'src/app/models/room.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-rooms-admin-h',
@@ -63,31 +64,74 @@ export class RoomsAdminHComponent implements OnInit {
 
   saveRoom(addRoomsForm: any){
     this.roomRest.saveRoom(this.room).subscribe({
-      next: (res:any)=>{alert(res.message);
-      this.getRoomsByHotel();
+      next: (res:any)=>{
+        Swal.fire({
+          title: res.message ,
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 2000,
+          position:'center'
+        })
+        addRoomsForm.reset();
+        this.getRoomsByHotel();
       },
-      
-      error: (err)=> alert(err.error.message || err.error)
-    });
-  }
+      error:(err)=>{
+        Swal.fire({
+        title: err.error.message,
+        icon: 'error',
+        timer: 4000,
+        position:'center'
+        })
+        addRoomsForm.reset();
+      }
+    })
+  };
 
 
     updateRoom(){
       this.roomRest.updateRoom(this.roomUpdate._id, this.roomUpdate).subscribe({
-        next: (res:any)=>{alert(res.message);
+        next: (res:any)=>{
+          Swal.fire({
+            title: res.message ,
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 2000,
+            position:'center'
+          })
           this.getRoomsByHotel();
         },
-        error: (err)=> alert(err.error.message || err.error)
-      });
-    }
+        error:(err)=>{
+          Swal.fire({
+          title: err.error.message,
+          icon: 'error',
+          timer: 4000,
+          position:'center'
+          }) 
+        }  
+      })
+    };
+    
 
     deleteRoom(idRoom:any){
       this.roomRest.deleteRoom(idRoom).subscribe({
-        next: (res:any)=>{alert(res.message);
+        next: (res:any)=>{
+          Swal.fire({
+            title: res.message ,
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 2000,
+            position:'center'
+          })
           this.getRoomsByHotel();
         },
-        error: (err)=> alert(err.error.message || err.error)
+        error:(err)=>{
+          Swal.fire({
+          title: err.error.message,
+          icon: 'error',
+          timer: 4000,
+          position:'center'
+          })
+        }  
       })
-    }
-  
+    };
 }

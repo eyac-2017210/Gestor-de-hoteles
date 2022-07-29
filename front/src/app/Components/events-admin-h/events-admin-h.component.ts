@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventModel } from 'src/app/models/event.model';
 import { EventRestService } from 'src/app/services/eventRest/event-rest.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-events-admin-h',
@@ -50,29 +51,72 @@ export class EventsAdminHComponent implements OnInit {
 
   saveEvent(addRoomsForm: any){
     this.eventRest.saveEvent(this.event).subscribe({
-      next: (res:any)=>{alert(res.message);
-      this.getEvents();
+      next: (res:any)=>{
+        Swal.fire({
+          title: res.message ,
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 2000,
+          position:'center'
+        })
+        addRoomsForm.reset();
+        this.getEvents();
       },
-      
-      error: (err)=> alert(err.error.message || err.error)
-    });
-  }
+      error:(err)=>{
+        Swal.fire({
+        title: err.error.message,
+        icon: 'error',
+        timer: 4000,
+        position:'center'
+        })
+        addRoomsForm.reset();
+      }
+    })
+  };
 
   eventUpdate(){
     this.eventRest.updateEvent(this.updateEvent._id, this.updateEvent).subscribe({
-      next: (res:any)=>{alert(res.message);
+      next: (res:any)=>{
+        Swal.fire({
+          title: res.message ,
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 2000,
+          position:'center'
+        })
         this.getEvents();
       },
-      error: (err)=> alert(err.error.message || err.error)
-    });
-  }
+      error:(err)=>{
+        Swal.fire({
+        title: err.error.message,
+        icon: 'error',
+        timer: 4000,
+        position:'center'
+        })
+      }
+    })
+  };
 
   deleteEvent(idEvent:any){
     this.eventRest.deleteEvent(idEvent).subscribe({
-      next: (res:any)=>{alert(res.message);
+      next: (res:any)=>{
+        Swal.fire({
+          title: res.message ,
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 2000,
+          position:'center'
+        })
         this.getEvents();
       },
-      error: (err)=> alert(err.error.message || err.error)
+      error:(err)=>{
+        Swal.fire({
+        title: err.error.message,
+        icon: 'error',
+        timer: 4000,
+        position:'center'
+        })
+      }
     })
-  }
+  };
 }

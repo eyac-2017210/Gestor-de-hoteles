@@ -21,7 +21,7 @@
                     <p>Cantidad de Habitaciones Disponibles
                     </p>
                     <label for="exampleInputEmail1" class="form-label" style="text-align: center; font-weight: bold; font-size: 25px;">{{room.available}}</label>                    
-                    <p>Precio: Q.{{room.price}}</p>
+                    <p>Precio por noche: Q.{{room.price}}</p>
                     <button (click)="getRoom(room._id)" *ngIf="role=='CLIENT'" type="button" class="btn btn-primary" data-bs-toggle="modal"
                     data-bs-target="#exampleModal">Reservar</button>
                 </div>
@@ -50,7 +50,7 @@
                             </div>
                             <br>
                           <div class="form-group">
-                            <label for="days">Días de hospedaje</label>
+                            <label for="days">Noches de hospedaje</label>
                             <input [(ngModel)]="reservation.days" name="days" type="number" class="form-control" id="days" placeholder="Días de hospedaje">
                           </div>
                           <br>

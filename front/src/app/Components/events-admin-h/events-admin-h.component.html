@@ -23,7 +23,7 @@ data-bs-target="#exampleModal">Agregar Evento </button>
                     <p>Precio: Q.{{event.price}}</p>
                     <p>Descripción del Evento
                     </p>
-                    <label for="exampleInputEmail1" class="form-label" style="text-align: center; font-weight: bold; font-size: 25px;">{{event.description}}</label>                    
+                    <label for="exampleInputEmail1" class="form-label" style="text-align: center; font-weight: bold; font-size: 20px;">{{event.description}}</label>                    
                     
                     <button (click)="getEventsById(event._id)" data-bs-toggle="modal"class="btn btn-secondary" data-bs-target="#updateModal">Editar Evento</button>
                     <button (click)="deleteEvent(event._id)"class="btn btn-secondary">Eliminar Evento</button>
@@ -66,7 +66,7 @@ data-bs-target="#exampleModal">Agregar Evento </button>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button (click)="saveEvent(addRoomsForm)" type="button" class="btn btn-primary">Guardar</button>
+                <button (click)="saveEvent(addRoomsForm)" data-bs-dismiss="modal" type="button" class="btn btn-primary">Guardar</button>
             </div>
         </div>
     </div>

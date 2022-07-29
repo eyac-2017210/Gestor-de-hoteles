@@ -47,7 +47,7 @@ data-bs-target="#exampleModal">Agregar Administrador de Hotel </button>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form>
+              <form #addUserForm="ngForm">
                 <div class="mb-3">
                     <span for="name">Nombre: </span>
                     <input [(ngModel)]="userM.name" name="name" id="name" class="form-control" type="text">
@@ -59,7 +59,7 @@ data-bs-target="#exampleModal">Agregar Administrador de Hotel </button>
                     
                 </div>
                 <div class="mb-3">
-                    <span for="username">Usuario: </span>
+                    <span for="username">Nombre de usuario: </span>
                     <input [(ngModel)]="userM.username" name="username" id="username" class="form-control" type="text">
                     
                 </div>
@@ -82,7 +82,7 @@ data-bs-target="#exampleModal">Agregar Administrador de Hotel </button>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button (click)="saveAdminHotel()" type="button" class="btn btn-primary">Guardar</button>
+                <button (click)="saveAdminHotel(addUserForm)" data-bs-dismiss="modal" class="btn btn-primary">Guardar</button>
             </div>
         </div>
     </div>

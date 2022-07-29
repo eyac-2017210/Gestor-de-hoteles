@@ -23,7 +23,7 @@ data-bs-target="#exampleModal">Agregar Habitación </button>
                     <p>Cantidad de Habitaciones Disponibles
                     </p>
                     <label for="exampleInputEmail1" class="form-label" style="text-align: center; font-weight: bold; font-size: 25px;">{{room.available}}</label>                    
-                    <p>Precio: Q.{{room.price}}</p>
+                    <p>Precio por noche: Q.{{room.price}}</p>
                     <button (click)="getRoom(room._id)" data-bs-toggle="modal"class="btn btn-secondary" data-bs-target="#updateModal">Editar Habitación</button>
                     <button (click)="deleteRoom(room._id)"class="btn btn-secondary">Eliminar Habitación</button>
                 </div>
@@ -56,7 +56,7 @@ data-bs-target="#exampleModal">Agregar Habitación </button>
                           </div>
                           <br>
                           <div class="form-group">
-                            <label for="price">Precio</label>
+                            <label for="price">Precio por noche</label>
                             <input [(ngModel)]="room.price" name="price" type="number" class="form-control" id="price" placeholder="Precio">
                           </div>
                         </form>
@@ -65,7 +65,7 @@ data-bs-target="#exampleModal">Agregar Habitación </button>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button (click)="saveRoom(addRoomsForm)" type="button" class="btn btn-primary">Guardar</button>
+                <button (click)="saveRoom(addRoomsForm)" data-bs-dismiss="modal" type="button" class="btn btn-primary">Guardar</button>
             </div>
         </div>
     </div>

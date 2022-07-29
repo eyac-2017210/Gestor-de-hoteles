@@ -74,7 +74,15 @@ export class RoomsComponent implements OnInit {
       addReservationForm.reset();
       this.router.navigateByUrl('/events/' + this.id);
       },
-      error:(err)=> alert(err.error.message || err.error)
+      error:(err)=>{
+        Swal.fire({
+        title: err.error.message,
+        icon: 'error',
+        timer: 4000,
+        position:'center'
+        })
+        addReservationForm.reset();
+      }
     })
   };
   

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserAdminService } from 'src/app/services/userAdmin/user-admin.service';
 import { UserModel } from 'src/app/models/user.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-usuarios-admin',
@@ -32,14 +33,31 @@ export class UsuariosAdminComponent implements OnInit {
     })
   };
 
-  saveAdminHotel(){
+  saveAdminHotel(addUserForm: any){
     this.userARest.saveAdminHotel(this.userM).subscribe({
-      next: (res:any)=>{alert(res.message);
-      this.getUsers();
+      next: (res:any)=>{
+        Swal.fire({
+          title: res.message ,
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 2000,
+          position:'center'
+        })
+        addUserForm.reset();
+        this.getUsers();
       },
-      error: (err)=> alert(err.error.message || err.error)
-    });
-  }
+      error:(err)=>{
+        Swal.fire({
+        title: err.error.message,
+        icon: 'error',
+        timer: 4000,
+        position:'center'
+        })
+        addUserForm.reset();
+      }
+    })
+  };
+  
   getUserId(idUsers:any){
     this.userARest.getUserId(idUsers).subscribe({
       next: (res:any)=> {
@@ -57,18 +75,42 @@ export class UsuariosAdminComponent implements OnInit {
   }
   updateuserAdmin(){
     this.userARest.updateuserAdmin(this.userUpdate._id, this.userUpdate).subscribe({
-      next: (res:any)=>{alert(res.message);
+      next: (res:any)=>{
+        Swal.fire({
+          title: res.message ,
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 2000,
+          position:'center'
+        })
         this.getUsers();
       },
-      error: (err)=> alert(err.error.message || err.error)
-    });
-  }
+      error:(err)=>Swal.fire({
+        title: err.error.message,
+        icon: 'error',
+        timer: 4000,
+        position:'center'
+      })
+    })
+  };
   deleteUserA(idUser:any){
     this.userARest.deleteUserA(idUser).subscribe({
-      next: (res:any)=>{alert(res.message);
+      next: (res:any)=>{
+        Swal.fire({
+          title: res.message ,
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 2000,
+          position:'center'
+        })
         this.getUsers();
       },
-      error: (err)=> alert(err.error.message || err.error)
+      error:(err)=>Swal.fire({
+        title: err.error.message,
+        icon: 'error',
+        timer: 4000,
+        position:'center'
+      })
     })
-  }
+  };
 }
